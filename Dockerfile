@@ -6,4 +6,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt \
+    && apt update -y \
+    # nodejsのインストール
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt install -y nodejs
